@@ -1,35 +1,45 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import "./App.css";
+import ListGroup from "./components/ListGroup";
+import Alert from "./components/Alert";
+import Button from "./components/Button";
+import { useState } from "react";
+// import Message from "./Message";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const items = [
+    "An item",
+    "A second item",
+    "A third item",
+    "A fourth item",
+    "And a fifth one",
+    "Here item selected  using state",
+  ];
+  //  return <div><Message /></div>;
+  const handleSelectedItem = (item: string) => {
+    console.log(item, "selected");
+  };
+
+  const [alertVisible, setAlertVisible] = useState(false);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div>
+      <ListGroup
+        items={items}
+        heading="List of items"
+        onSelectItem={handleSelectedItem}
+      />
+      {/* <Alert text="Hello World" /> OR */}
+      {alertVisible && (
+        <Alert onClose={() => setAlertVisible(false)}>
+          Hello <span> World</span>
+        </Alert>
+      )}
+      <Button color="primary" onClick={() => setAlertVisible(true)}>
+        Click Me
+      </Button>
+      {/* <ListGroup /> */}
+    </div>
+  );
 }
 
-export default App
+export default App;
